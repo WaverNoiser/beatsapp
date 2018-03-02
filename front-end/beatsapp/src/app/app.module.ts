@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RoutingModule } from './routes';
 import { RouterLink } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +26,9 @@ import { SigninComponent } from './components/signin/signin.component';
   imports: [
     BrowserModule,
     RoutingModule,
+    HttpModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -50,11 +50,6 @@ create an app express
 */
 var app = express();
 
-/* 
-importing route
-*/
-const route = require( './routes/route' );
-
 // ading middleware ( cors ) to app 
 app.use( cors() );
 
@@ -64,8 +59,13 @@ app.use( bodyParser.json() );
 // static files 
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
+/* 
+importing route
+*/
+const route = require( './routes/route' );
+
 // api REST
-app.use( '/api', route );
+app.use( route );
 
 // testing server
 app.get( '/', ( req, res )=> { res.send( 'foobar' ) } );
