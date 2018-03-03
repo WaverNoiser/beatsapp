@@ -13,6 +13,12 @@ router.get( '/users', ( req, res, next )=> {
         res.json( users );
     } ) } );
     
+// retrieving an specified user
+router.get( '/user/:id', ( req, res, next )=> { 
+    User.find( { _id: req.params.id }, function( err, users ){
+        res.json( users );
+    } ) } );
+    
     // add user
     router.post( '/contact', ( req, res, next )=> {
         let newContact = new Contact( {
