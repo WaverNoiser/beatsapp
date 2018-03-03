@@ -2,30 +2,47 @@
   <div class="row">
     <div class="col-md-6 offset-md-3 ">
       <div class="bg-dark text-light">
-        <form>
+        <form #singupForm="ngForm">
           <div class="form-group container">
-            <label for="exampleInputEmail1">Nombre de usuario</label>
-            <input [(ngModel)]="nickname" name="first" type="nickname" class="form-control" id="name" aria-describedby="nickname" placeholder="Tu nombre/nickname aqui">
+            <label for="nickName" style="margin-top: 1">Nombre de usuario</label>
+            <input [(ngModel)]="nickName" name="userName" type="nickname" class="form-control" id="nickName" placeholder="Tu nombre/nickname aqui"
+              required #newUser="ngModel">
           </div>
-            <div class="form-group container">
-              <label for="exampleInputEmail1">Correo electronico</label>
-              <input [(ngModel)]="email" name = "mail" type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="micorreo@beatsapp.com">
-            </div>
-            <div class="form-group container">
-              <label for="exampleInputPassword1">Contraseña</label>
-              <input [(ngModel)]="password" name = "pass" type="password" class="form-control" id="InputPassword" placeholder="Password">
-            </div>
-            <div class="form-group container">
-              <label for="exampleInputPassword1">Confirma tu contraseña contraseña</label>
-              <input [(ngModel)]="confirm_password" name = "confirm" type="password" class="form-control" id="confirmInputPassword" placeholder="Password again">
-              <small id="confirmPassword" class="form-text text-muted">La contraseña deberá contener al menos 8 caractéres</small>
-            </div>
-            <div class="form-check offset-4">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Recordarme</label>
-            </div>
-            <button (click)= "addUser()" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Registrar</button>
-          </form>
+          <div [hidden]="newUser.valid || newUser.pristine" class="alert alert-danger container">
+            El nombre de usuario es necesario
+          </div>
+          <div class="form-group container">
+            <label for="exampleInputEmail1">Correo electronico</label>
+            <input [(ngModel)]="email" name="mail" type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="micorreo@beatsapp.com"
+              required #correoe="ngModel">
+          </div>
+          <div [hidden]="correoe.valid || correoe.pristine" class="alert alert-danger">
+            El email es necesario
+          </div>
+          <div class="form-group container">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input [(ngModel)]="password" name="pass" type="password" class="form-control" id="InputPassword" placeholder="Password"
+              required #pass="ngModel">
+          </div>
+          <div [hidden]="pass.valid || pass.pristine" class="alert alert-danger container">
+            la contraseña es necesaria
+          </div>
+          <div class="form-group container">
+            <label for="confirmInputPassword">Confirma tu contraseña contraseña</label>
+            <input [(ngModel)]="confirm_password" name="confirm" type="password" class="form-control" id="confirmInputPassword" placeholder="Password again"
+              required #confirm="ngModel">
+              <div [hidden]="confirm.valid || confirm.pristine" class="alert alert-danger container">
+                confirma la contraseña
+              </div>
+              
+            <small id="confirmPassword" class="form-text text-muted">La contraseña deberá contener al menos 8 caractéres</small>
+          </div>
+          <div class="form-check offset-4">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+          </div>
+          <button (click)="addUser()" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Registrar</button>
+        </form>
       </div>
     </div>
   </div>

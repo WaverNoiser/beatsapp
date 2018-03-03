@@ -16,7 +16,7 @@ export class UserService {
   }
 
   // add users
-  addContact(newUser: User) {
+  addUser(newUser: User) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/user',
