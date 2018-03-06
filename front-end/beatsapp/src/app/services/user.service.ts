@@ -16,11 +16,13 @@ export class UserService {
   }
 
   // add users
-  addUser(newUser: User) {
+  addUser( newUser: User ) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/user',
-      newUser, { headers: headers }).map(res => res.json());
+      newUser, { headers: headers }).map(res => { res.json();
+      console.log('res', res);
+       } );
   }
 
 

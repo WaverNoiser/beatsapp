@@ -5,17 +5,19 @@ const mongoose = require( 'mongoose' );
 const UserSchema = mongoose.Schema( {
     nickName:{
         type: String,
-        require: true
+        require: true,
     },
     email:{
         type: String,
-        require: true
+        require: true,
     },
     password:{
         type: String,
         require: true
-    }
+    },
 } );
+
+ 
 
 // exporting to use in another file
 const User = module.exports = mongoose.model( 'User', UserSchema );

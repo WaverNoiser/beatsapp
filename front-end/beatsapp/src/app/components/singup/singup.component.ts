@@ -36,15 +36,14 @@ export class SingupComponent implements OnInit {
       this.newUser.nickName = this.nickName;
       this.newUser.email = this.email;
       this.newUser.password = this.password;
-    this.userService.addUser( this.newUser );
+     this.userService.addUser( this.newUser ).map( msg =>  console.log( msg ) );
+
     }
   }
 
   // valida si el usuario introdujo la misma contraseña en los 2 campos
   isCorrectPassword(pass: string, c_pass: string) {
-    console.log(pass === c_pass);
-    const isCorrect = pass === c_pass;
-    return isCorrect;
+    return pass === c_pass;
   }
 
 }
