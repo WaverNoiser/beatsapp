@@ -23,8 +23,6 @@ router.get('/user/:id', (req, res, next) => {
 
 // add user
 router.post('/user', (req, res, next) => {
-    console.log();
-    
     let newUser = new User({
         nickName: req.body.nickName,
         email: req.body.email,
@@ -33,8 +31,7 @@ router.post('/user', (req, res, next) => {
 
     newUser.save((err, user) => {
         if (err) {
-            console.log('error al agregar usuario:' + err);
-            res.json({ msg: 'Failed to add user' });
+            res.json({ msg: err });
         }
         else {
             console.log('se ha agregado el usuario');

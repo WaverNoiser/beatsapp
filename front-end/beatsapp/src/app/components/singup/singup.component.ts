@@ -36,7 +36,7 @@ export class SingupComponent implements OnInit {
       this.newUser.nickName = this.nickName;
       this.newUser.email = this.email;
       this.newUser.password = this.password;
-     this.userService.addUser( this.newUser ).map( msg =>  console.log( msg ) );
+    console.log( this.userService.addUser( this.newUser ) );
 
     }
   }

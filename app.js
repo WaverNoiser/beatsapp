@@ -13,6 +13,9 @@ var express = require( 'express' );
 // framework to MongoDB
 var mongoose = require( 'mongoose' );
 
+// http request logger middleware
+var morgan = require('morgan')
+
 /* 
 creating a database called beatsapp
 */
@@ -58,6 +61,8 @@ app.use( bodyParser.json() );
 
 // static files 
 app.use( express.static( path.join( __dirname, 'public' ) ) );
+
+app.use(morgan('combined'));
 
 /* 
 importing route
