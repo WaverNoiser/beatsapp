@@ -6,20 +6,24 @@
            <header class="text-center"><h4>Acceder</h4></header>
             <div class="form-group container">
               <label for="exampleInputEmail1">Usuario</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario" #user>
               <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
             </div>
             <div class="form-group container">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <label for="exampleInputPassword1">Contraseña</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" #pass>
+              <small><a [routerLink]="['/singup']">Registrarse gratis</a></small>
             </div>
             <div class="form-check offset-4">
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              <label class="form-check-label" for="exampleCheck1">Recordarme</label>
             </div>
-            <button type="submit" class="btn btn-primary col-6 offset-3">Submit</button>
+            <button (click)="ingresar( user.value )" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Ingresar</button>
           </form>
         </div>
+      </div>
+      <div class="col-md-3">
+          <app-message [thereIsMessage]="!response" [message]="'Aun no te has registrado'"></app-message>
       </div>
     </div>
   </div>

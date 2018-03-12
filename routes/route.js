@@ -16,7 +16,7 @@ router.get('/users', (req, res, next) => {
 
 // retrieving an specified user
 router.get('/user/:id', (req, res, next) => {
-    User.find({ _id: req.params.id }, function (err, users) {
+    User.find({ nickName: req.params.id }, function (err, users) {
         res.json(users);
     })
 });

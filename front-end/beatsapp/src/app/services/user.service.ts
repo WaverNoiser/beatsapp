@@ -3,15 +3,19 @@ import { Http, Headers } from '@angular/http';
 import { User } from '../models/user.model';
 import 'rxjs/add/operator/map';
 import { HttpResponse } from '@angular/common/http';
+
 @Injectable()
 export class UserService {
 
   // almacenara la ultima respuesta del servidor
-  public lastResponse: any;
-  value = [];
+  public lastResponse: number;
+
 
   constructor(private http: Http) {
+    this.lastResponse = -1;
   }
+
+  headers = new Headers();
 
   // recuperando contactos
   getUsers() {
@@ -21,15 +25,21 @@ export class UserService {
   }
 
   // add users
-  addUser( newUser: User ) {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  addUser( newUser: User ): number {
     this.http.post('http://localhost:3000/user',
-      newUser, { headers: headers })
-      .subscribe(res => { this.value = Object.values( res );
+      newUser, { headers: this.headers })
+      .subscribe(res => {
+        // esto devuelve el codigo de la base de datos
+        // cuando se intenta agregar un usuario que ya existe
+          this.lastResponse = Object.values( Object.values( res.json() )[0] )[0];
        } );
-       console.log( this.value );
+          return this.lastResponse;
         }
+
+
+  getUser( nickName: string ) {
+    return this.http.get('http://localhost:3000/user/' + nickName);
+    }
 
 
 }

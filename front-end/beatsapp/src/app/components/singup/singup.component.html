@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 20px">
+<div class="container-fluid" style="margin-top: 20px">
   <div class="row">
     <div class="col-md-6 offset-md-3 ">
       <div class="bg-dark text-light">
@@ -31,11 +31,12 @@
             <label for="confirmInputPassword">Confirma tu contraseña contraseña</label>
             <input [(ngModel)]="confirm_password" name="confirm" type="password" class="form-control" id="confirmInputPassword" placeholder="Password again"
               required #confirm="ngModel">
-              <div [hidden]="confirm.valid || confirm.pristine" class="alert alert-danger container">
-                confirma la contraseña
-              </div>
-              
+            <div [hidden]="confirm.valid || confirm.pristine" class="alert alert-danger container">
+              confirma la contraseña
+            </div>
+
             <small id="confirmPassword" class="form-text text-muted">La contraseña deberá contener al menos 8 caractéres</small>
+            <small><a [routerLink]="['/singin']">Ya tengo cuenta</a></small>
           </div>
           <div class="form-check offset-4">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
@@ -45,5 +46,10 @@
         </form>
       </div>
     </div>
+    <div class="col-md-3">
+        <app-message [thereIsMessage]="isInDB" [message]="'no existe el nombre de usuario o contraseña'"></app-message>
+    </div>
+    
   </div>
 </div>
+
