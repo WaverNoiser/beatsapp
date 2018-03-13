@@ -27,8 +27,7 @@ export class SigninComponent implements OnInit {
       try {
       this.existUser = (obj[0].nickName === nickName) && ( this.equals( obj[0].password , password )  );
       if ( this.existUser ) {
-        console.log('aqui');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/wallpost']);
       }
       } catch (err) {
         this.existUser = false;

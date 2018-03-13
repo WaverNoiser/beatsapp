@@ -14,6 +14,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { SingupComponent } from './components/singup/singup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { MessageComponent } from './components/singup/message/message.component';
+import { WallpostComponent } from './components/wallpost/wallpost.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MessageComponent } from './components/singup/message/message.component'
     TopbarComponent,
     SingupComponent,
     SigninComponent,
-    MessageComponent
+    MessageComponent,
+    WallpostComponent
   ],
   imports: [
     BrowserModule,

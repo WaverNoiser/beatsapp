@@ -2,16 +2,16 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 ">
         <div class="bg-dark text-light">
-          <form>
+          <form #singinForm="ngForm">
            <header class="text-center"><h4>Acceder</h4></header>
             <div class="form-group container">
               <label for="exampleInputEmail1">Usuario</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario" #user>
+              <input [(ngModel)]="email" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Correo/Nombre de usuario" required #user ="ngModel">
               <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
             </div>
             <div class="form-group container">
               <label for="exampleInputPassword1">Contraseña</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" #pass>
+              <input (ngModel)="pass" type="password" name="pass" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required #pass = "ngModel">
               <small><a [routerLink]="['/singup']">Registrarse gratis</a></small>
             </div>
             <div class="form-check offset-4">
@@ -24,6 +24,8 @@
       </div>
       <div class="col-md-3">
           <app-message [thereIsMessage]="existUser" [message]="'Aun no te has registrado'"></app-message>
+          <app-message [thereIsMessage]="user.valid || user.pristine" [message]="'El nombre de usuario es necesario'"></app-message>
+          <app-message [thereIsMessage]="pass.valid || pass.pristine" [message]="'La contraseña es necesaria'"></app-message>
       </div>
     </div>
   </div>
