@@ -18,12 +18,12 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Recordarme</label>
             </div>
-            <button (click)="ingresar( user.value )" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Ingresar</button>
+            <button (click)="ingresar( user.value, pass.value )" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Ingresar</button>
           </form>
         </div>
       </div>
       <div class="col-md-3">
-          <app-message [thereIsMessage]="!response" [message]="'Aun no te has registrado'"></app-message>
+          <app-message [thereIsMessage]="existUser" [message]="'Aun no te has registrado'"></app-message>
       </div>
     </div>
   </div>
