@@ -14,7 +14,21 @@ var express = require( 'express' );
 var mongoose = require( 'mongoose' );
 
 // http request logger middleware
-var morgan = require('morgan')
+var morgan = require('morgan');
+
+// management files mongoose 
+var gridfs = require( 'mongoose-gridfs' );
+
+// module to gridfs
+var fs = require('fs');
+
+/* //instantiate mongoose-gridfs
+var gridfs = require('mongoose-gridfs')({
+    collection:'Userschema',
+    model:'Attachment',
+    mongooseConnection: mongoose.connection
+  });
+ */
 
 /* 
 creating a database called beatsapp

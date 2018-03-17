@@ -25,13 +25,16 @@ export class UserService {
   }
 
   // add users
-  addUser( newUser: User ): number {
+  addUser( newUser: User, cb: ( param: number ) => any ): number {
     this.http.post('http://localhost:3000/user',
       newUser, { headers: this.headers })
       .subscribe(res => {
         // esto devuelve el codigo de la base de datos
         // cuando se intenta agregar un usuario que ya existe
-          this.lastResponse = Object.values( Object.values( res.json() )[0] )[0];
+          const lastResponse = Object.values( Object.values( res.json() )[0] )[0];
+          if ( lastResponse ) {
+            cb( lastResponse );
+          }
        } );
           return this.lastResponse;
         }

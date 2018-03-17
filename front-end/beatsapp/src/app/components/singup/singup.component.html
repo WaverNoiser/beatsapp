@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 offset-md-3 ">
       <div class="bg-dark text-light">
-        <form #singupForm="ngForm">
+        <form (ngSubmit)=addUser(singupForm) #singupForm="ngForm">
           <div class="form-group container">
             <label for="nickName" style="margin-top: 1">Nombre de usuario</label>
             <input [(ngModel)]="nickName" name="userName" type="nickname" class="form-control" id="nickName" placeholder="Tu nombre/nickname aqui"
@@ -42,14 +42,14 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
             <label class="form-check-label" for="exampleCheck1">Recordarme</label>
           </div>
-          <button (click)="addUser()" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Registrar</button>
+          <button (click)="addUser( singupForm )" [disabled]="!singupForm.form.valid" type="submit" class="btn btn-primary col-6 offset-3" style="margin-bottom: 10px">Registrar</button>
         </form>
       </div>
     </div>
     <div class="col-md-3">
-        <app-message [thereIsMessage]="isInDB" [message]="'no existe el nombre de usuario o contraseña'"></app-message>
+        <div class="alert alert-warning" (@showAnimation.start)="animationStarted($event)" (@showAnimation.done)="animationDone($event)" [@showAnimation]="isInDB"  style="margin-top: 10px; position: fixed; top: 0;" >Ya existe el usuario</div>
+        <div class="alert alert-secondary" [@showAnimation]="isInDB"  style="margin-top: 10px; position: fixed" >Intenta con otro nombre, u otro email</div>
     </div>
     
   </div>
 </div>
-

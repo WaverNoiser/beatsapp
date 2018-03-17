@@ -1,16 +1,41 @@
-import { Component,
-         OnInit,
-         OnChanges,
-         EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  EventEmitter
+} from '@angular/core';
+
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-singup',
   templateUrl: './singup.component.html',
   styleUrls: ['./singup.component.css'],
-  providers: [ UserService ]
+  providers: [ UserService ],
+  animations: [
+    trigger('showAnimation', [
+      state('false', style({
+        opacity: '0'
+      })),
+      state('true',   style({
+        opacity: '1'
+      })),
+      transition('false => true', animate('1000ms ease-in')),
+      transition('true => false', animate('3000ms ease-out'))
+    ])
+  ]
 })
+
 export class SingupComponent implements OnInit, OnChanges {
 
   nickName: string;
@@ -18,18 +43,20 @@ export class SingupComponent implements OnInit, OnChanges {
   password: string;
   confirm_password: string;
 
-  newUser: User;
   submitted = false;
 
+  // lanza la animación
+  show: boolean;
+
   // ya esta el usuario en la base de datos?
-  public isInDB = true;
+  public isInDB = false;
 
   // codigo de la BD para cuando ya existe el usuario o
   // el correo
   ISINDB = 11000;
 
   constructor( private userService: UserService ) {
-
+    this.show = false;
 
   }
 
@@ -40,29 +67,35 @@ export class SingupComponent implements OnInit, OnChanges {
   }
 
   // agrega el usuario en la base de datos
-  addUser() {
+  addUser(form: NgForm) {
     const samePass = this.isCorrectPassword(this.password, this.confirm_password);
     if (samePass) {
-      this.newUser = new User(
-        this.nickName,
-        this.email,
-        this.password);
+      let newUser: User;
+      newUser = new User(
+        form.value.userName,
+        form.value.mail,
+        form.value.pass);
 
-      this.newUser.nickName = this.nickName;
-      this.newUser.email = this.email;
-      this.newUser.password = this.password;
-      const code = this.userService.addUser(this.newUser);
-       console.log( code );
-       if ( code === this.ISINDB ) {
-         console.log( 'esta en la BD');
-         this.isInDB = false;
+       this.userService.addUser(newUser, resp => {
+        this.isInDB = resp === 11000;
        }
+        );
     }
   }
 
   // valida si el usuario introdujo la misma contraseña en los 2 campos
   isCorrectPassword(pass: string, c_pass: string) {
     return pass === c_pass;
+  }
+
+  // la animacion inició
+
+  animationStarted( $event ) {
+  }
+
+  // cuando la animacion terminó
+
+  animationDone( $event ) {
   }
 
 
