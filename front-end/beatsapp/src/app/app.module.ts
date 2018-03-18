@@ -18,6 +18,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { MessageComponent } from './components/singup/message/message.component';
 import { WallpostComponent } from './components/wallpost/wallpost.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     SingupComponent,
     SigninComponent,
     MessageComponent,
-    WallpostComponent
+    WallpostComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
