@@ -47,8 +47,8 @@
       </div>
     </div>
     <div class="col-md-3">
-        <div class="alert alert-warning" (@showAnimation.start)="animationStarted($event)" (@showAnimation.done)="animationDone($event)" [@showAnimation]="isInDB"  style="margin-top: 10px; position: fixed; top: 0;" >Ya existe el usuario</div>
-        <div class="alert alert-secondary" [@showAnimation]="isInDB"  style="margin-top: 10px; position: fixed" >Intenta con otro nombre, u otro email</div>
+        <div class="alert alert-warning" (@showAnimation.start)="animationStarted($event)" (@showAnimation.done)="animationDone($event)" [@showAnimation]="isInDB"  style="margin-top: 10px;" >Ya existe el usuario</div>
+        <div class="alert alert-secondary" [@showAnimation]="isInDB"  style="margin-top: 10px;" >Intenta con otro nombre, u otro email</div>
     </div>
     
   </div>

@@ -31,7 +31,7 @@ export class UserService {
       .subscribe(res => {
         // esto devuelve el codigo de la base de datos
         // cuando se intenta agregar un usuario que ya existe
-          const lastResponse = Object.values( Object.values( res.json() )[0] )[0];
+          const lastResponse = res.json();
           if ( lastResponse ) {
             cb( lastResponse );
           }

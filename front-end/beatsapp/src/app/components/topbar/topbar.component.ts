@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
+  isCollapsed: boolean;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  collapsing() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
 }

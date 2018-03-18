@@ -31,10 +31,11 @@ router.post('/user', (req, res, next) => {
 
     newUser.save((err, user) => {
         if (err) {
-            res.json({ msg: err });
+            res.status(200).json(err);
+            /* res.json( {msg: err }); */
         }
         else {
-            console.log('se ha agregado el usuario');
+            res.status(201);
             res.json({ msg: 'Added user succesfully' })
         }
     });

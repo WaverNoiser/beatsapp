@@ -7,6 +7,9 @@ import {
 
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { HttpInterceptorService } from '../../services/http-interceptor.service';
+import { Router } from '@angular/router';
+
 
 import {
   trigger,
@@ -21,17 +24,17 @@ import { NgForm } from '@angular/forms';
   selector: 'app-singup',
   templateUrl: './singup.component.html',
   styleUrls: ['./singup.component.css'],
-  providers: [ UserService ],
+  providers: [ UserService, HttpInterceptorService ],
   animations: [
     trigger('showAnimation', [
       state('false', style({
         opacity: '0'
       })),
       state('true',   style({
-        opacity: '1'
+        opacity: '1',
       })),
       transition('false => true', animate('1000ms ease-in')),
-      transition('true => false', animate('3000ms ease-out'))
+      transition('true => false', animate('3000ms 3s ease-out'))
     ])
   ]
 })
@@ -55,9 +58,12 @@ export class SingupComponent implements OnInit, OnChanges {
   // el correo
   ISINDB = 11000;
 
-  constructor( private userService: UserService ) {
+  constructor(
+    private userService: UserService,
+    interceptor: HttpInterceptorService,
+    private router: Router ) {
     this.show = false;
-
+    const next =  {};
   }
 
   ngOnInit() {
@@ -68,6 +74,7 @@ export class SingupComponent implements OnInit, OnChanges {
 
   // agrega el usuario en la base de datos
   addUser(form: NgForm) {
+    try {
     const samePass = this.isCorrectPassword(this.password, this.confirm_password);
     if (samePass) {
       let newUser: User;
@@ -77,11 +84,16 @@ export class SingupComponent implements OnInit, OnChanges {
         form.value.pass);
 
        this.userService.addUser(newUser, resp => {
-        this.isInDB = resp === 11000;
+        this.isInDB = (Object.values( resp )[0] === 11000);
+        if ( !this.isInDB ) {
+          this.router.navigate( ['/wallpost'] );
+         }
        }
         );
     }
-  }
+  } catch ( err ) { console.log( err );
+   }
+}
 
   // valida si el usuario introdujo la misma contraseña en los 2 campos
   isCorrectPassword(pass: string, c_pass: string) {
@@ -96,6 +108,7 @@ export class SingupComponent implements OnInit, OnChanges {
   // cuando la animacion terminó
 
   animationDone( $event ) {
+    this.isInDB = false;
   }
 
 
