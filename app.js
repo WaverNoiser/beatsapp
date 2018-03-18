@@ -22,23 +22,60 @@ var gridfs = require( 'mongoose-gridfs' );
 // module to gridfs
 var fs = require('fs');
 
-/* //instantiate mongoose-gridfs
-var gridfs = require('mongoose-gridfs')({
-    collection:'Userschema',
-    model:'Attachment',
-    mongooseConnection: mongoose.connection
-  });
- */
-
 /* 
 creating a database called beatsapp
 */
 mongoose.connect( 'mongodb://localhost:27017/beatsapp' );
 
+// User schema from mnongoose 
+const User = require('./schemas/user');
+
 //on connection
-mongoose.connection.on( 'connected', ()=>{
+mongoose.connection.on('connected', () => {
     console.log('connected to database mongodb @ 27017');
-} );
+    //instantiate mongoose-gridfs
+    var gridfs = require('mongoose-gridfs')({
+        collection: 'avatar',
+        model: 'avatarModel',
+        mongooseConnection: mongoose.connection
+    });
+
+    //obtain a model
+    Attachment = gridfs.model;
+
+    // create or save a file
+    Attachment.write({
+        filename:'arbol.jpg', 
+        contentType:'image'
+        }, 
+        fs.createReadStream('./assets/arbol.jpg'), 
+        function(error, createdFile){
+          if( error )
+          console.log('occurs an error adding file', error);
+          if( createdFile )
+          console.log('it has been created');
+          
+      }  ) ;
+
+      console.log( mongoose.modelNames()[0]);
+      
+
+      // to read a file
+       Attachment.readById('5aae98f7c6384856045400bb', function(error, content){
+           if(error) {
+               console.log('error al obtener el archivo');
+               
+           }
+
+           if(content) {
+               console.log('se encontro el archivo' , content);
+               
+           }
+        
+      }) 
+});
+
+
 
 // if there is an error on connection
 mongoose.connection.on( 'error', (err)=>{
@@ -46,6 +83,12 @@ mongoose.connection.on( 'error', (err)=>{
         console.log('Error in database connection: ', err);
     }
 } );
+
+
+
+
+
+
 
 /* 
 Node.js body parsing middleware.
