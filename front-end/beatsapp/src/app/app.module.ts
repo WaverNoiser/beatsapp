@@ -19,6 +19,7 @@ import { MessageComponent } from './components/singup/message/message.component'
 import { WallpostComponent } from './components/wallpost/wallpost.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserAnimationsModule,
   ],
   providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+      { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+      UserService
   ],
   bootstrap: [AppComponent]
 })

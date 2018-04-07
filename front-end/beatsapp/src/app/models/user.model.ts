@@ -1,9 +1,14 @@
 export class User {
-    constructor(
-        public nickName: string,
-        public email?: string,
-        public password?: string,
-        public img?: string ) {
-        }
+    public nickName;
+    public email;
+    public password;
+    public date;
+
+    constructor(nickName: string, email?: string, password?: string  ) {
+     this.nickName =  nickName;
+     this.email = email;
+     this.password = password;
+     this.date = new Date();
+    }
 
 }

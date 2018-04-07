@@ -19,7 +19,7 @@ public size: string;
   constructor( private userService: UserService ) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe( users => this.users = users );
+   /*  this.userService.getUsers().subscribe( users => this.users = users ); */
   }
 
   change( colorFont, sizeFont  ): void {
