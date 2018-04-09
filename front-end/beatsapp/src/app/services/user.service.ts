@@ -14,6 +14,9 @@ export class UserService {
   public lastResponse: number;
   headers = new Headers();
 
+  // arreglo de todos los usuarios obtenidos por la BD
+  users: User[];
+
   // notificador del usuario entrante
 @Output() enterUser: EventEmitter<String> = new EventEmitter();
 
@@ -29,11 +32,15 @@ export class UserService {
 
 
   // recuperando contactos
-  getUsers() {
+  getUsers( cb: ( users ) => any ) {
+    /* let users: User[]; */
     return this.http.get('http://localhost:3000/users')
-      .map(res => console.log(res.json())
-      );
-  }
+    .subscribe(
+      res => {
+        cb(  Object.values( res )  );
+      }
+    );
+    }
 
   // add users
   addUser(newUser: User, cb: (param: number) => any): number {
@@ -53,7 +60,8 @@ export class UserService {
 
 // return an especified user
   getUser(nickName: string): Observable <User[]> {
-    return this.http.get('http://localhost:3000/user/' + nickName).map( resp => resp.json());
+    return this.http.get('http://localhost:3000/user/' + nickName)
+    .map( resp => resp.json());
   }
 
   // set current user

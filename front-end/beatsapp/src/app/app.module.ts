@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 
@@ -40,6 +40,7 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    ClickOutsideModule
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },

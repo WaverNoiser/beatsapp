@@ -11,6 +11,7 @@ const User = require('../schemas/user');
 router.get('/users', (req, res, next) => {
     User.find(function (err, users) {
         res.json(users);
+        res.err.json('error al buscar los usuarios')
     })
 });
 

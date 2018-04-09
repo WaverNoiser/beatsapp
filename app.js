@@ -44,7 +44,7 @@ mongoose.connection.on('connected', () => {
     Attachment = gridfs.model;
 
     // create or save a file
-    Attachment.write({
+   /*  Attachment.write({
         filename:'arbol.jpg', 
         contentType:'image'
         }, 
@@ -55,13 +55,13 @@ mongoose.connection.on('connected', () => {
           if( createdFile )
           console.log('it has been created');
           
-      }  ) ;
+      }  ) ; */
 
-      console.log( mongoose.modelNames()[0]);
-      
+/*       console.log( mongoose.modelNames()[0]);
+ */      
 
       // to read a file
-       Attachment.readById('5aae98f7c6384856045400bb', function(error, content){
+   /*     Attachment.readById('5aae98f7c6384856045400bb', function(error, content){
            if(error) {
                console.log('error al obtener el archivo');
                
@@ -72,7 +72,7 @@ mongoose.connection.on('connected', () => {
                
            }
         
-      }) 
+      })  */
 });
 
 

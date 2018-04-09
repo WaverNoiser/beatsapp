@@ -23,34 +23,25 @@ export class TopbarComponent implements OnInit, OnChanges, DoCheck {
   isCollapsed: boolean;
   isShown: boolean;
 
-   userName: any;
+  userName: any;
   userSuscription: Subscription;
-  user = 'pedro';
+  showNameUser = false;
 
   constructor(public _userService: UserService) {
     console.log('constructor topbar');
     this.userName = _userService.currentUser;
     this.userSuscription = this._userService.getCurrenUser().subscribe(
       value => {
-        console.log(value);
         this.userName = value;
-       /*  this.user = value[0].nickName; */
+        this.showNameUser = true;
       }
     );
-
-/*
-    this._userService.enterUser.subscribe(  nombre => {
-      console.log( 'Nombre: ' + nombre );
-      this.userName =  nombre;
-    } ); */
-
   }
 
   ngOnInit() {
   }
 
   ngOnChanges() {
-    console.log('onchange');
   }
 
   ngDoCheck() {
@@ -68,7 +59,9 @@ export class TopbarComponent implements OnInit, OnChanges, DoCheck {
     this.userName = 'jesus';
   }
 
-
+  onClickedOutside() {
+    this.isShown = false;
+  }
 
 
 
