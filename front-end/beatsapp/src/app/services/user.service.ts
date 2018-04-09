@@ -56,6 +56,18 @@ export class UserService {
       });
     return this.lastResponse;
   }
+  // update user's image
+  updateImage(cb: (binding) => any) {
+    this.http.put('http://localhost:3000/user/updateImageProf',
+      {}, { headers: this.headers })
+      .subscribe(res => {
+        // respuesta
+        const lastResponse = res.json();
+        if (lastResponse) {
+          cb(lastResponse);
+        }
+      });
+  }
 
 
 // return an especified user

@@ -7,6 +7,9 @@ const router = express.Router();
 // User schema from mnongoose 
 const User = require('../schemas/user');
 
+// module to gridfs
+var fs = require('fs');
+
 // retrieving users
 router.get('/users', (req, res, next) => {
     User.find(function (err, users) {
@@ -21,6 +24,23 @@ router.get('/user/:id', (req, res, next) => {
         res.json(users);
     })
 });
+
+router.put(
+    '/user/updateImageProf', (req, res, next) => {
+        Attachment.write({
+            filename: 'imageUserProfile',
+            contentType: 'image'
+        },
+            fs.createReadStream('./assets/arbol.jpg'),
+            function (error, createdFile) {
+                if (error)
+                    console.log('occurs an error adding file', error);
+                if (createdFile)
+                    console.log('it has been created');
+
+            });
+    }
+);
 
 // add user
 router.post('/user', (req, res, next) => {
