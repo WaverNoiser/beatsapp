@@ -10,6 +10,13 @@ const User = require('../schemas/user');
 // module to gridfs
 var fs = require('fs');
 
+//instantiate mongoose-gridfs
+var gridfs = require('mongoose-gridfs')({
+    collection: 'avatar',
+    model: 'avatarModel',
+    mongooseConnection: mongoose.connection
+});
+
 // retrieving users
 router.get('/users', (req, res, next) => {
     User.find(function (err, users) {
@@ -27,6 +34,9 @@ router.get('/user/:id', (req, res, next) => {
 
 router.put(
     '/user/updateImageProf', (req, res, next) => {
+        //obtain a model
+    Attachment = gridfs.model;
+
         Attachment.write({
             filename: 'imageUserProfile',
             contentType: 'image'
@@ -39,6 +49,9 @@ router.put(
                     console.log('it has been created');
 
             });
+
+            console.log('atach?', Attachment);
+            
     }
 );
 
