@@ -56,8 +56,9 @@ export class UserService {
       });
     return this.lastResponse;
   }
+
   // update user's image
-  updateImage(cb: (binding) => any) {
+  updateImage( image: File , cb: (binding) => any) {
     this.http.put('http://localhost:3000/user/updateImageProf',
       {}, { headers: this.headers })
       .subscribe(res => {

@@ -27,7 +27,9 @@ router.get('/user/:id', (req, res, next) => {
 
 router.put(
     '/user/updateImageProf', (req, res, next) => {
-            
+            res.json('imagen recibida: ' + Object.values( req.body) );
+            console.log( 'contiene: ' +  Object.values( req.body )  );
+                        
     }
 );
 
