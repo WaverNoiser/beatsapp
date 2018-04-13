@@ -7,6 +7,9 @@ const router = express.Router();
 // User schema from mnongoose 
 const User = require('../schemas/user');
 
+// module to gridfs
+var fs = require('fs');
+
 var mongoServices = require('../mongo/mongo');
 
 
@@ -27,9 +30,38 @@ router.get('/user/:id', (req, res, next) => {
 
 router.put(
     '/user/updateImageProf', (req, res, next) => {
-            res.json('imagen recibida: ' + Object.values( req.body) );
-            console.log( 'contiene: ' +  Object.values( req.body )  );
-                        
+        res.json( 'imagen recibida' );
+        //instantiate mongoose-gridfs
+        var gridfs = require('mongoose-gridfs')({
+            collection: 'imageProfile',
+            model: 'imageProfileModel',
+            mongooseConnection: mongoServices.connection
+        });
+
+        //obtain a model
+        Attachment = gridfs.model;
+
+        //para escribir archivos
+        Attachment.write({
+            filename: 'imageUserProfile',
+            contentType: 'image'
+        },
+            fs.createReadStream('./assets/arbol.jpg'),
+            function (error, createdFile) {
+                function error ( error ){
+                    console.log('error' + error );
+                }
+                function create ( createdFile ){
+                    console.log('se creo el archivo');
+                    
+                }
+
+                error(error);
+                create(createdFile);
+            });
+            
+            console.log('atach: ' + Attachment);
+            
     }
 );
 

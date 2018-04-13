@@ -20,11 +20,6 @@ export class WallpostComponent implements OnInit {
       }
     );
 
-    _userService.updateImage(
-      ( res ) => {
-        console.log(res);
-       }
-    );
   }
 
   ngOnInit() {

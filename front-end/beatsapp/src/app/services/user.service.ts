@@ -60,7 +60,7 @@ export class UserService {
   // update user's image
   updateImage( image: File , cb: (binding) => any) {
     this.http.put('http://localhost:3000/user/updateImageProf',
-      {}, { headers: this.headers })
+    image, { headers: this.headers })
       .subscribe(res => {
         // respuesta
         const lastResponse = res.json();
