@@ -16,8 +16,12 @@ var mongoServices = require('../mongo/mongo');
 // retrieving users
 router.get('/users', (req, res, next) => {
     User.find(function (err, users) {
-        res.json(users);
-        res.err.json('error al buscar los usuarios')
+        if( users ) { 
+            res.json(users) }
+        if( err ) { 
+            console.log('err: ' + err);
+            // res.json( err ) 
+        }
     })
 });
 
@@ -28,9 +32,9 @@ router.get('/user/:id', (req, res, next) => {
     })
 });
 
-router.put(
+
+router.post(
     '/user/updateImageProf', (req, res, next) => {
-        res.json( 'imagen recibida' );
         //instantiate mongoose-gridfs
         var gridfs = require('mongoose-gridfs')({
             collection: 'imageProfile',
@@ -38,30 +42,40 @@ router.put(
             mongooseConnection: mongoServices.connection
         });
 
+        console.log( 'body: ' +   req.body.image   );
+        
         //obtain a model
-        Attachment = gridfs.model;
+        Attachment =  gridfs.model  ;
 
+        try{
         //para escribir archivos
         Attachment.write({
             filename: 'imageUserProfile',
             contentType: 'image'
         },
-            fs.createReadStream('./assets/arbol.jpg'),
+            
+            fs.readFile( req.body.image, 
+            function (error, data){ 
+                if (error) console.log( 'error reading file' + error );
+                if (data) console.log( '\n file\' buffer:' + data );
+             }
+            ),
             function (error, createdFile) {
                 function error ( error ){
                     console.log('error' + error );
                 }
                 function create ( createdFile ){
                     console.log('se creo el archivo');
-                    
                 }
 
                 error(error);
                 create(createdFile);
-            });
+            }
+        );
+        }catch(error){
+            console.log( error );
             
-            console.log('atach: ' + Attachment);
-            
+        }
     }
 );
 
@@ -73,8 +87,11 @@ router.post('/user', (req, res, next) => {
         password: req.body.password
     });
 
+    try {
     newUser.save((err, user) => {
         if (err) {
+            console.log('\nerror al agregar usuario: ' + err);
+            
             res.status(200).json(err);
             /* res.json( {msg: err }); */
         }
@@ -83,6 +100,10 @@ router.post('/user', (req, res, next) => {
             res.json({ msg: 'Added user succesfully' })
         }
     });
+}catch(e){
+    console.log('error on model.save()');
+    
+}
 
 });
 

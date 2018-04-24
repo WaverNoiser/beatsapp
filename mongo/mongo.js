@@ -1,10 +1,33 @@
 // framework to MongoDB
 var mongoose = require('mongoose');
 
+const f = require('util').format;
+
+const assert = require('assert');
+
+const userAdmin = encodeURIComponent('beatsAppUser');
+const password = encodeURIComponent('beatsAppUser');
+const authMechanism = 'DEFAULT';
+
+// Connection URL
+const url = f('mongodb://%s:%s@localhost:27017/beatsapp?authMechanism=%s',
+userAdmin, password, authMechanism);
+
+
 /* 
 creating a database called beatsapp
 */
-mongoose.connect('mongodb://localhost:27017/beatsapp');
+
+mongoose.connect(url).then(
+    conected => {
+        console.log( 'Ha ingresado correctamente: ' + userAdmin );
+        
+    },
+    fail => {
+        console.log('no se conecto: ' + fail);
+        
+    }
+); 
 
 //on connection
 mongoose.connection.on('connected', () => {

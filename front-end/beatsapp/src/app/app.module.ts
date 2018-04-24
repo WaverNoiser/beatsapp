@@ -31,7 +31,7 @@ import { UserService } from './services/user.service';
     SigninComponent,
     MessageComponent,
     WallpostComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

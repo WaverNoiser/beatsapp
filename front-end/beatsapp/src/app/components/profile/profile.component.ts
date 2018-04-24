@@ -13,12 +13,12 @@ export class ProfileComponent implements OnInit {
   }
 
   sendImage( input: HTMLInputElement  ) {
-    const file = input.files[0];
-    console.log( 'sending file: ' + file.name );
-    this._userService.updateImage( file  ,
-      res => console.log('respuesta al subir imagen' + res)
+    const file = input.files.item(0);
+    console.log( 'sending file: ' +   input.files  );
+ /*    this._userService.updateImage( file  ,
+      res => console.log('respuesta al subir imagen \n' + res)
     );
-
+ */
   }
 
 }

@@ -58,9 +58,9 @@ export class UserService {
   }
 
   // update user's image
-  updateImage( image: File , cb: (binding) => any) {
-    this.http.put('http://localhost:3000/user/updateImageProf',
-    image, { headers: this.headers })
+  updateImage( Image: File , cb: (binding) => any) {
+    this.http.post('http://localhost:3000/user/updateImageProf',
+    { 'image': Image }, { headers: this.headers })
       .subscribe(res => {
         // respuesta
         const lastResponse = res.json();
@@ -89,5 +89,16 @@ export class UserService {
   getCurrenUser( ) {
     return this.user.asObservable();
   }
+
+ // conectar a una BD especifica
+ conexionBD( dataBase: string ) {
+   this.http.get( 'http://localhost:3000/' + dataBase )
+   .subscribe(
+     res => {
+       console.log( 'conecxionDB response: ' + res );
+     }
+   );
+ }
+
 
 }
