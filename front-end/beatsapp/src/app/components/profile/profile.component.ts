@@ -12,13 +12,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendImage( input: HTMLInputElement  ) {
-    const file = input.files.item(0);
-    console.log( 'sending file: ' +   input.files  );
- /*    this._userService.updateImage( file  ,
+  sendImage(input: HTMLInputElement) {
+    /* const fm = new FormData();
+    fm.append('imagen', input.files[0]);
+    const file = input.files.item(0); */
+    console.log('sending file: ' + input.files);
+      this._userService.updateImage( input.files[0]  ,
       res => console.log('respuesta al subir imagen \n' + res)
     );
- */
+
   }
 
 }

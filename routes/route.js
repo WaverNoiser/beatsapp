@@ -10,7 +10,11 @@ const User = require('../schemas/user');
 // module to gridfs
 var fs = require('fs');
 
+//inicia los servicios asociados a mongo
 var mongoServices = require('../mongo/mongo');
+
+//multipart-form-data
+var FormData = require('form-data');
 
 
 // retrieving users
@@ -35,48 +39,13 @@ router.get('/user/:id', (req, res, next) => {
 
 router.post(
     '/user/updateImageProf', (req, res, next) => {
-        //instantiate mongoose-gridfs
-        var gridfs = require('mongoose-gridfs')({
-            collection: 'imageProfile',
-            model: 'imageProfileModel',
-            mongooseConnection: mongoServices.connection
-        });
-
-        console.log( 'body: ' +   req.body.image   );
+        console.log(  Object.values(mongoServices)  );
         
-        //obtain a model
-        Attachment =  gridfs.model  ;
-
-        try{
-        //para escribir archivos
-        Attachment.write({
-            filename: 'imageUserProfile',
-            contentType: 'image'
-        },
+                
+      
+        
+    }            
             
-            fs.readFile( req.body.image, 
-            function (error, data){ 
-                if (error) console.log( 'error reading file' + error );
-                if (data) console.log( '\n file\' buffer:' + data );
-             }
-            ),
-            function (error, createdFile) {
-                function error ( error ){
-                    console.log('error' + error );
-                }
-                function create ( createdFile ){
-                    console.log('se creo el archivo');
-                }
-
-                error(error);
-                create(createdFile);
-            }
-        );
-        }catch(error){
-            console.log( error );
-            
-        }
-    }
 );
 
 // add user

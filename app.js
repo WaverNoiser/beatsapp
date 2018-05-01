@@ -10,9 +10,6 @@
 // framework to Node.js
 var express = require( 'express' );
 
-// framework to MongoDB
-var mongoose = require( 'mongoose' );
-
 // http request logger middleware
 var morgan = require('morgan');
 

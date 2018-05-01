@@ -1,5 +1,8 @@
 // framework to MongoDB
-var mongoose = require('mongoose');
+mongoose = require('mongoose');
+
+var Mongoclient = require('mongodb').MongoClient;
+var Grid = Mongoclient.Grid;
 
 const f = require('util').format;
 

@@ -58,7 +58,7 @@ export class UserService {
   }
 
   // update user's image
-  updateImage( Image: File , cb: (binding) => any) {
+  updateImage( file: File, cb: (binding) => any) {
     this.http.post('http://localhost:3000/user/updateImageProf',
     { 'image': Image }, { headers: this.headers })
       .subscribe(res => {
